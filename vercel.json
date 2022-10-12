@@ -2,7 +2,7 @@
     "version": 2,
     "name": "alura-geek",
     "env": {
-        "MONGO_DB_URI": "mongodb+srv://lukz:lukz256linux@cluster0.jtlnr.mongodb.net/alura_geek?retryWrites=true&w=majority"
+        "MONGODB_DB_URI": "mongodb+srv://lukz:lukz256linux@cluster0.jtlnr.mongodb.net/alura_geek?retryWrites=true&w=majority"
     },
     "builds": [
       {
