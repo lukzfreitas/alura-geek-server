@@ -1,6 +1,9 @@
 {
     "version": 2,
-    "name": "lukz-freitas",
+    "name": "alura-geek",
+    "env": {
+        "MONGO_DB_URI": "mongodb+srv://lukz:lukz256linux@cluster0.jtlnr.mongodb.net/alura_geek?retryWrites=true&w=majority"
+    },
     "builds": [
       {
         "src": "dist/main.js",
@@ -10,7 +13,13 @@
     "routes": [
       {
         "src": "/(.*)",
-        "dest": "dist/main.js"
+        "dest": "dist/main.js",
+        "methods": [
+            "GET",
+            "POST",
+            "PUT",
+            "DELETE"
+        ]
       }
     ]
   }
