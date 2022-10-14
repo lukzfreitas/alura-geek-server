@@ -12,10 +12,25 @@ export class ProductService {
     }
 
     async findAll(): Promise<Product[]> {
-        return this.productModel.find().exec();
+        return this.productModel.find().populate("category").exec();
     }
 
-    async findOne(code: string): Promise<Product> {
+    async findOne(code: Number): Promise<Product> {
         return this.productModel.findOne({ code }).exec();
+    }
+
+    async findAllByCategory() {
+        return this.productModel.aggregate([
+            {
+                $group: {
+                    _id: "$category"
+                }
+            }
+
+        ]).exec();
+    }
+
+    async delete(code: Number): Promise<void> {
+        this.productModel.findOneAndDelete({ code }).exec();
     }
 }

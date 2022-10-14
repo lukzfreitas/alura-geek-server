@@ -5,10 +5,12 @@ import { AppService } from './app.service';
 import { ConfigurationModule } from './configuration/configuration.module';
 import { ConfigurationService } from './configuration/configuration.service';
 import { ProductModule } from './product/product.module';
+import { CategoryModule } from './category/category.module';
 
 @Module({
   imports: [
     ProductModule,
+    CategoryModule,
     ConfigurationModule,
     MongooseModule.forRootAsync({
       imports: [ConfigurationModule],
@@ -20,7 +22,8 @@ import { ProductModule } from './product/product.module';
         };
         return options
       }
-    })
+    }),
+    CategoryModule
   ],
   controllers: [AppController],
   providers: [AppService],
