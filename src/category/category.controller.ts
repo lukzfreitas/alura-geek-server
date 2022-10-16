@@ -4,15 +4,20 @@ import { CategoryService } from './category.service';
 
 @Controller('category')
 export class CategoryController {
-    constructor(private productService: CategoryService) {}    
+    constructor(private categoryService: CategoryService) {}    
 
     @Post()
     async create(@Body() category: Category): Promise<Category> {
-        return this.productService.create(category);
+        return this.categoryService.create(category);
     }
 
     @Get()
     async findAll(): Promise<Category[]> {
-        return this.productService.findAll();
+        return this.categoryService.findAll();
+    }
+
+    @Get('products')
+    async findByCategory() {
+        return this.categoryService.findCategoriesAndProducts();
     }
 }

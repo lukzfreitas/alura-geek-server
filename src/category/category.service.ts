@@ -14,4 +14,17 @@ export class CategoryService {
     async findAll(): Promise<Category[]> {
         return this.categoryModel.find().exec();
     }
+
+    async findCategoriesAndProducts() {        
+        return this.categoryModel.aggregate([
+            {
+                $lookup: {
+                    from: "products",
+                    localField: "_id",
+                    foreignField: "category",
+                    as: "products"
+                },                
+            }
+        ]).exec();
+    }
 }

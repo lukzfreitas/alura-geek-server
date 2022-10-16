@@ -5,7 +5,7 @@ import { Product, ProductDocument } from './product.schema';
 
 @Injectable()
 export class ProductService {
-    @InjectModel(Product.name) private productModel: Model<ProductDocument>
+    @InjectModel(Product.name) private productModel: Model<ProductDocument>    
 
     async create(product: Product): Promise<Product> {
         return new this.productModel(product).save();
@@ -17,17 +17,6 @@ export class ProductService {
 
     async findOne(code: Number): Promise<Product> {
         return this.productModel.findOne({ code }).exec();
-    }
-
-    async findAllByCategory() {
-        return this.productModel.aggregate([
-            {
-                $group: {
-                    _id: "$category"
-                }
-            }
-
-        ]).exec();
     }
 
     async delete(code: Number): Promise<void> {

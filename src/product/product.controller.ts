@@ -17,11 +17,6 @@ export class ProductController {
         return this.productService.findAll();
     }
 
-    @Get('category')
-    async findByCategory() {
-        return this.productService.findAllByCategory();
-    }
-
     @Get(':code')
     async findByCode(@Param('code') code: Number): Promise<Product> {
         return this.productService.findOne(code);
