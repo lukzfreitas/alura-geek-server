@@ -1,23 +1,28 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { Category } from './category.schema';
 import { CategoryService } from './category.service';
 
 @Controller('category')
 export class CategoryController {
-    constructor(private categoryService: CategoryService) {}    
+  constructor(private categoryService: CategoryService) {}
 
-    @Post()
-    async create(@Body() category: Category): Promise<Category> {
-        return this.categoryService.create(category);
-    }
+  @Post()
+  async create(@Body() category: Category): Promise<Category> {
+    return this.categoryService.create(category);
+  }
 
-    @Get()
-    async findAll(): Promise<Category[]> {
-        return this.categoryService.findAll();
-    }
+  @Get()
+  async findAll(): Promise<Category[]> {
+    return this.categoryService.findAll();
+  }
 
-    @Get('products')
-    async findByCategory() {
-        return this.categoryService.findCategoriesAndProducts();
-    }
+  @Get(':code/products')
+  async findById(@Param('code') code: string) {
+    return this.categoryService.findByCode(Number.parseInt(code));
+  }
+
+  @Get('products')
+  async findByCategory() {
+    return this.categoryService.findCategoriesAndProducts();
+  }
 }

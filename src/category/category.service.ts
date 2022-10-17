@@ -5,26 +5,46 @@ import { Category, CategoryDocument } from './category.schema';
 
 @Injectable()
 export class CategoryService {
-    @InjectModel(Category.name) private categoryModel: Model<CategoryDocument>
+  @InjectModel(Category.name) private categoryModel: Model<CategoryDocument>;
 
-    async create(category: Category): Promise<Category> {
-        return new this.categoryModel(category).save();
-    }
+  async create(category: Category): Promise<Category> {
+    return new this.categoryModel(category).save();
+  }
 
-    async findAll(): Promise<Category[]> {
-        return this.categoryModel.find().exec();
-    }
+  async findAll(): Promise<Category[]> {
+    return this.categoryModel.find().exec();
+  }
 
-    async findCategoriesAndProducts() {        
-        return this.categoryModel.aggregate([
-            {
-                $lookup: {
-                    from: "products",
-                    localField: "_id",
-                    foreignField: "category",
-                    as: "products"
-                },                
-            }
-        ]).exec();
-    }
+  async findByCode(code: number) {
+    return this.categoryModel
+      .aggregate([
+        {
+          $match: { code },
+        },
+        {
+          $lookup: {
+            from: 'products',
+            localField: '_id',
+            foreignField: 'category',
+            as: 'products',
+          },
+        },
+      ])
+      .exec();
+  }
+
+  async findCategoriesAndProducts() {
+    return this.categoryModel
+      .aggregate([
+        {
+          $lookup: {
+            from: 'products',
+            localField: '_id',
+            foreignField: 'category',
+            as: 'products',
+          },
+        },
+      ])
+      .exec();
+  }
 }

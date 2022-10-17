@@ -4,26 +4,25 @@ import { ProductService } from './product.service';
 
 @Controller('product')
 export class ProductController {
-    
-    constructor(private productService: ProductService) {}    
+  constructor(private productService: ProductService) {}
 
-    @Post()
-    async create(@Body() product: Product): Promise<Product> {
-        return this.productService.create(product);
-    }
+  @Post()
+  async create(@Body() product: Product): Promise<Product> {
+    return this.productService.create(product);
+  }
 
-    @Get()
-    async findAll(): Promise<Product[]> {
-        return this.productService.findAll();
-    }
+  @Get()
+  async findAll(): Promise<Product[]> {
+    return this.productService.findAll();
+  }
 
-    @Get(':code')
-    async findByCode(@Param('code') code: Number): Promise<Product> {
-        return this.productService.findOne(code);
-    }
+  @Get(':code')
+  async findByCode(@Param('code') code: number): Promise<Product> {
+    return this.productService.findOne(code);
+  }
 
-    @Delete(':code')
-    async delete(@Param('code') code: Number): Promise<void> {
-        return this.productService.delete(code)
-    }
+  @Delete(':code')
+  async delete(@Param('code') code: number): Promise<void> {
+    return this.productService.delete(code);
+  }
 }
