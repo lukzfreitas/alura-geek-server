@@ -26,7 +26,7 @@ export class CategoryController {
     return this.categoryService.findByCode(Number.parseInt(code));
   }
 
-  @Get(':code/products')
+  @Get('/category/:code/products')
   async findByCodeProducts(@Param('code') code: string) {
     return this.categoryService.findByCodeProducts(Number.parseInt(code));
   }
