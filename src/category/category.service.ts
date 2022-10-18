@@ -16,6 +16,10 @@ export class CategoryService {
   }
 
   async findByCode(code: number) {
+    return this.categoryModel.findOne({ code }).exec();
+  }
+
+  async findByCodeProducts(code: number) {
     return this.categoryModel
       .aggregate([
         {
