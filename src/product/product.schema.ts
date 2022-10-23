@@ -7,7 +7,9 @@ export type ProductDocument = Product & Document
 @Schema()
 export class Product {
 
-    @Prop({ type: Number, required: true })
+    id: string;
+
+    @Prop({ type: Number, default: 0, unique: true })
     code: Number;
 
     @Prop({ type: String, required: true })

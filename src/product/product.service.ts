@@ -5,10 +5,13 @@ import { Product, ProductDocument } from './product.schema';
 
 @Injectable()
 export class ProductService {
-    @InjectModel(Product.name) private productModel: Model<ProductDocument>    
+    @InjectModel(Product.name) private productModel: Model<ProductDocument>
 
-    async create(product: Product): Promise<Product> {
-        return new this.productModel(product).save();
+    async create(product: Product): Promise<Product> {        
+        const newProduct: Product = await new this.productModel(product).save();
+        const count: number = await this.productModel.count();
+        const prodcutUpdate = await this.productModel.findByIdAndUpdate({_id : newProduct.id}, {code: count});
+        return prodcutUpdate;
     }
 
     async findAll(): Promise<Product[]> {
