@@ -9,7 +9,7 @@ export class Product {
 
     id: string;
 
-    @Prop({ type: Number, default: 0, unique: true })
+    @Prop({ type: Number, default: 0 })
     code: Number;
 
     @Prop({ type: String, required: true })
