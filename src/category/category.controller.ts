@@ -1,10 +1,11 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import { QueryParams } from 'src/models/query-params.model';
 import { Category } from './category.schema';
 import { CategoryService } from './category.service';
 
 @Controller()
 export class CategoryController {
-  constructor(private categoryService: CategoryService) {}
+  constructor(private categoryService: CategoryService) { }
 
   @Post()
   async create(@Body() category: Category): Promise<Category> {
@@ -17,8 +18,9 @@ export class CategoryController {
   }
 
   @Get('/category/products')
-  async findByCategory() {
-    return this.categoryService.findCategoriesAndProducts();
+  async findByCategory(@Query() query: any) {
+    query = new QueryParams(query);
+    return this.categoryService.findCategoriesAndProducts(query);
   }
 
   @Get('/category/:code')

@@ -37,7 +37,7 @@ export class CategoryService {
       .exec();
   }
 
-  async findCategoriesAndProducts() {
+  async findCategoriesAndProducts(query: any) {
     return this.categoryModel
       .aggregate([
         {
@@ -46,6 +46,9 @@ export class CategoryService {
             localField: '_id',
             foreignField: 'category',
             as: 'products',
+            pipeline: [
+              { $limit: Number.parseInt(query?.limit || 0) }
+            ]
           },
         },
       ])
