@@ -1,6 +1,12 @@
 {
   "name": "alura-geek-server",
   "version": "0.0.1",
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "vercel-sapper"
+    }
+  ],
   "description": "",
   "author": "",
   "private": true,
