@@ -7,7 +7,6 @@
       "use": "@vercel/node"
     }
   ],
-  "use": "vercel-sapper",
   "config": {
     "include": [
       "posts"
