@@ -5,7 +5,7 @@ import { CategoryService } from './category.service';
 
 @Controller()
 export class CategoryController {
-  constructor(private categoryService: CategoryService) { }
+  constructor(private categoryService: CategoryService) {}
 
   @Post()
   async create(@Body() category: Category): Promise<Category> {

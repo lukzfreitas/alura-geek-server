@@ -1,8 +1,7 @@
 export class QueryParams {
+  limit: number;
 
-    limit: number;
-
-    constructor({ limit = 10 }) {
-        this.limit = limit;
-    }
+  constructor({ limit = 10 }) {
+    this.limit = limit;
+  }
 }

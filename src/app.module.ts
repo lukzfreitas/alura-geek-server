@@ -20,12 +20,12 @@ import { CategoryModule } from './category/category.module';
           uri: appConfigService.connectionString,
           useUnifiedTopology: true,
         };
-        return options
-      }
+        return options;
+      },
     }),
-    CategoryModule
+    CategoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}
