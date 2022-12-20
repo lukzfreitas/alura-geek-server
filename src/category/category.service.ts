@@ -46,7 +46,7 @@ export class CategoryService {
             localField: '_id',
             foreignField: 'category',
             as: 'products',
-            // pipeline: [{ $limit: Number.parseInt(query?.limit || 0) }],
+            pipeline: [{ $limit: Number.parseInt(query?.limit || 0) }],
           },
         },
       ])
