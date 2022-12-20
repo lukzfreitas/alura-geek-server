@@ -3,11 +3,8 @@
   "name": "alura-geek",
   "builds": [
     {
-      "src": "package.json",
-      "use": "vercel-sapper",
-      "config": {
-        "build": true
-      }
+      "src": "src/main.ts",
+      "use": "@vercel/node"
     }
   ],  
   "routes": [
