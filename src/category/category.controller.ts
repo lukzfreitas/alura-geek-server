@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
-import { QueryParams } from 'src/models/query-params.model';
+import { QueryParams } from '../models/query-params.model';
 import { Category } from './category.schema';
 import { CategoryService } from './category.service';
 
