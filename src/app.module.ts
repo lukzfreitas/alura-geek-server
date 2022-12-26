@@ -6,11 +6,15 @@ import { ConfigurationModule } from './configuration/configuration.module';
 import { ConfigurationService } from './configuration/configuration.service';
 import { ProductModule } from './product/product.module';
 import { CategoryModule } from './category/category.module';
+import { LoginModule } from './login/login.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
     ProductModule,
     CategoryModule,
+    LoginModule,
+    AuthModule,
     ConfigurationModule,
     MongooseModule.forRootAsync({
       imports: [ConfigurationModule],
