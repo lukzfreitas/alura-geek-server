@@ -16,7 +16,7 @@ import { RefreshTokenAuthGuard } from '../auth/guards/refresh-token-auth.guard';
 export class LoginController {
   constructor(private authService: AuthService) {}
 
-  @Public()
+  // @Public()
   @Post('login')
   async login(@Body() { username, password }) {
     return this.authService.login(username, password);
