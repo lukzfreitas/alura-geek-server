@@ -6,11 +6,11 @@ import {
   HttpCode,
   UseGuards,
 } from '@nestjs/common';
-import { Public } from 'src/auth/auth.constant';
-import { AuthService } from 'src/auth/auth.service';
-import { GetCurrentUserUsername } from 'src/auth/get-current-user-username.decorator';
-import { GetCurrentUser } from 'src/auth/get-current-user.decorator';
-import { RefreshTokenAuthGuard } from 'src/auth/guards/refresh-token-auth.guard';
+import { Public } from '../auth/auth.constant';
+import { AuthService } from '../auth/auth.service';
+import { GetCurrentUserUsername } from '../auth/get-current-user-username.decorator';
+import { GetCurrentUser } from '../auth/get-current-user.decorator';
+import { RefreshTokenAuthGuard } from '../auth/guards/refresh-token-auth.guard';
 
 @Controller('auth')
 export class LoginController {

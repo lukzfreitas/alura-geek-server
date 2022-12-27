@@ -1,8 +1,8 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { ConfigurationService } from 'src/configuration/configuration.service';
-import { Users } from 'src/users/users.schema';
-import { UsersService } from 'src/users/users.service';
+import { ConfigurationService } from '../configuration/configuration.service';
+import { Users } from '../users/users.schema';
+import { UsersService } from '../users/users.service';
 import { JwtPayload } from './types/jtw-payload.type';
 import * as argon from 'argon2';
 
