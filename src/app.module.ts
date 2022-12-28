@@ -30,6 +30,12 @@ import { AuthModule } from './auth/auth.module';
     CategoryModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_GUARD,
+      useClass: AccessTokenAuthGuard,
+    },
+  ],
 })
 export class AppModule {}
