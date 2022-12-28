@@ -12,7 +12,7 @@ import { GetCurrentUserUsername } from '../auth/get-current-user-username.decora
 import { GetCurrentUser } from '../auth/get-current-user.decorator';
 // import { RefreshTokenAuthGuard } from '../auth/guards/refresh-token-auth.guard';
 
-@Controller()
+@Controller('auth')
 export class LoginController {
   constructor(private authService: AuthService) {}
 
