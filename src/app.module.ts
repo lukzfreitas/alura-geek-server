@@ -8,6 +8,8 @@ import { ProductModule } from './product/product.module';
 import { CategoryModule } from './category/category.module';
 import { LoginModule } from './login/login.module';
 import { AuthModule } from './auth/auth.module';
+import { APP_GUARD } from '@nestjs/core';
+import { AccessTokenAuthGuard } from './auth/guards/access-token-auth.guard';
 
 @Module({
   imports: [
