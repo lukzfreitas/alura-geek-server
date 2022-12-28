@@ -12,11 +12,11 @@ import { GetCurrentUserUsername } from '../auth/get-current-user-username.decora
 import { GetCurrentUser } from '../auth/get-current-user.decorator';
 import { RefreshTokenAuthGuard } from '../auth/guards/refresh-token-auth.guard';
 
-@Controller('auth')
+@Controller()
 export class LoginController {
   constructor(private authService: AuthService) {}
 
-  // @Public()
+  @Public()
   @Post('login')
   async login(@Body() { username, password }) {
     return this.authService.login(username, password);
