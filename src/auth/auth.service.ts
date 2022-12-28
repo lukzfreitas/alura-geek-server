@@ -14,46 +14,46 @@ export class AuthService {
     private appConfigService: ConfigurationService,
   ) {}
 
-  async validateUser(username: string, pass: string): Promise<any> {
-    const user: Users = await this.usersService.findOne(username);
+  async validateUser(email: string, pass: string): Promise<any> {
+    const user: Users = await this.usersService.findOne(email);
     if (user && user.password === pass) {
       return user;
     }
     return null;
   }
 
-  async login(username: string, password: string) {
-    const userFound: Users = await this.usersService.findOne(username);
+  async login(email: string, password: string) {
+    const userFound: Users = await this.usersService.findByEmail(email);
     const verify = await argon.verify(userFound.password, password);
     if (!userFound || !verify) {
       throw new ForbiddenException('Acccess Denied');
     }
     const tokens = await this.getTokens(userFound);
     const refresh_token = await argon.hash(tokens.refresh_token);
-    await this.usersService.updateTokens(username, refresh_token);
+    await this.usersService.updateTokens(email, refresh_token);
     return tokens;
   }
 
-  async logout(username: string) {
-    return await this.usersService.updateTokens(username, null);
+  async logout(email: string) {
+    return await this.usersService.updateTokens(email, null);
   }
 
-  async refreshTokens(username: string, refresh_token: string): Promise<any> {
-    const user: Users = await this.usersService.findOne(username);
+  async refreshTokens(email: string, refresh_token: string): Promise<any> {
+    const user: Users = await this.usersService.findByEmail(email);
     if (!user || !user.refresh_token)
       throw new ForbiddenException('Access Denied');
     const rtMatches = await argon.verify(user.refresh_token, refresh_token);
     if (!rtMatches) throw new ForbiddenException('Access Denied');
 
     const tokens = await this.getTokens(user);
-    await this.updateRefreshToken(user.username, tokens.refresh_token);
+    await this.updateRefreshToken(user.email, tokens.refresh_token);
 
     return tokens;
   }
 
-  async updateRefreshToken(username: string, refresh_token: string) {
+  async updateRefreshToken(email: string, refresh_token: string) {
     const hash = await argon.hash(refresh_token);
-    await this.usersService.updateTokens(username, hash);
+    await this.usersService.updateTokens(email, hash);
   }
 
   async getTokens(user: Users): Promise<any> {

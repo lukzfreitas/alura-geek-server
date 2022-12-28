@@ -18,13 +18,13 @@ export class LoginController {
 
   @Public()
   @Post('login')
-  async login(@Body() { username, password }) {
-    return this.authService.login(username, password);
+  async login(@Body() { email, password }) {
+    return this.authService.login(email, password);
   }
 
   @Post('logout')
-  async logout(@Body() { username }) {
-    this.authService.logout(username);
+  async logout(@Body() { email }) {
+    this.authService.logout(email);
   }
 
   @Public()
