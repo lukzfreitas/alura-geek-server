@@ -4,19 +4,19 @@ import {
   Post,
   HttpStatus,
   HttpCode,
-  UseGuards,
+  // UseGuards,
 } from '@nestjs/common';
-import { Public } from '../auth/auth.constant';
+// import { Public } from '../auth/auth.constant';
 import { AuthService } from '../auth/auth.service';
 import { GetCurrentUserUsername } from '../auth/get-current-user-username.decorator';
 import { GetCurrentUser } from '../auth/get-current-user.decorator';
-import { RefreshTokenAuthGuard } from '../auth/guards/refresh-token-auth.guard';
+// import { RefreshTokenAuthGuard } from '../auth/guards/refresh-token-auth.guard';
 
 @Controller('auth')
 export class LoginController {
   constructor(private authService: AuthService) {}
 
-  @Public()
+  // @Public()
   @Post('login')
   async login(@Body() { username, password }) {
     return this.authService.login(username, password);
@@ -27,8 +27,8 @@ export class LoginController {
     this.authService.logout(username);
   }
 
-  @Public()
-  @UseGuards(RefreshTokenAuthGuard)
+  // @Public()
+  // @UseGuards(RefreshTokenAuthGuard)
   @Post('refresh')
   @HttpCode(HttpStatus.OK)
   async refresh(
