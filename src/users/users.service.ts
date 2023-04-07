@@ -24,4 +24,8 @@ export class UsersService {
     user.password = await argon.hash(user.password);
     return new this.usersModel(user).save();
   }
+
+  async findAll() {
+    return await this.usersModel.find();
+  }
 }

@@ -10,6 +10,7 @@ import { LoginModule } from './login/login.module';
 import { AuthModule } from './auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
 import { AccessTokenAuthGuard } from './auth/guards/access-token-auth.guard';
+import { IsUserValidatorConstraint } from './users/user.validator';
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { AccessTokenAuthGuard } from './auth/guards/access-token-auth.guard';
   ],
   controllers: [AppController],
   providers: [
+    IsUserValidatorConstraint,
     AppService,
     {
       provide: APP_GUARD,
