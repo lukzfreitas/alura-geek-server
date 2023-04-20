@@ -2,27 +2,35 @@ import {
   ExceptionFilter,
   Catch,
   ArgumentsHost,
-  HttpException,
   HttpStatus,
 } from '@nestjs/common';
 import { HttpAdapterHost } from '@nestjs/core';
 import { MongoError } from 'mongodb';
 
+export class MessageError {
+  static MESSAGE = 'Internal Server Error';
+  static HTTP_STATUS = HttpStatus.INTERNAL_SERVER_ERROR;
+}
+
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {
   constructor(private readonly httpAdapterHost: HttpAdapterHost) {}
 
-  catch(exception: unknown, host: ArgumentsHost): void {
+  catch(exception: any, host: ArgumentsHost): void {
     const { httpAdapter } = this.httpAdapterHost;
 
     const ctx = host.switchToHttp();
 
-    const httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+    let message: string;
+    let httpStatus: number;
 
-    const message =
-      exception instanceof MongoError
-        ? exception.message
-        : 'Internal Server Error';
+    if (exception instanceof MongoError) {
+      message = exception.message;
+      httpStatus = Number.parseInt(exception.code.toString());
+    } else {
+      message = exception?.message || MessageError.MESSAGE;
+      httpStatus = exception?.getStatus() || MessageError.HTTP_STATUS;
+    }
 
     const responseBody = {
       statusCode: httpStatus,

@@ -18,6 +18,7 @@ export class LoginController {
 
   @Public()
   @Post('login')
+  @HttpCode(HttpStatus.OK)
   async login(@Body() { email, password }) {
     return this.authService.login(email, password);
   }
