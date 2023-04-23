@@ -21,7 +21,7 @@ export class ProductController {
   }
 
   @Public()
-  @Put()
+  @Post('update')
   async update(@Body() product: any): Promise<Product> {
     return this.productService.update(product);
   }
