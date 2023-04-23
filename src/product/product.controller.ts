@@ -1,6 +1,15 @@
-import { Post, Body, Controller, Get, Param, Delete } from '@nestjs/common';
+import {
+  Post,
+  Body,
+  Controller,
+  Get,
+  Param,
+  Delete,
+  Put,
+} from '@nestjs/common';
 import { Product } from './product.schema';
 import { ProductService } from './product.service';
+import { Public } from 'src/auth/auth.constant';
 
 @Controller('products')
 export class ProductController {
@@ -9,6 +18,12 @@ export class ProductController {
   @Post()
   async create(@Body() product: any): Promise<Product> {
     return this.productService.create(product);
+  }
+
+  @Public()
+  @Put()
+  async update(@Body() product: any): Promise<Product> {
+    return this.productService.update(product);
   }
 
   @Get()

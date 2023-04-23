@@ -3,6 +3,7 @@ import {
   Catch,
   ArgumentsHost,
   HttpStatus,
+  NotFoundException,
 } from '@nestjs/common';
 import { HttpAdapterHost } from '@nestjs/core';
 import { MongoError } from 'mongodb';
@@ -21,15 +22,16 @@ export class AllExceptionsFilter implements ExceptionFilter {
 
     const ctx = host.switchToHttp();
 
-    let message: string;
-    let httpStatus: number;
+    let message: string = MessageError.MESSAGE;
+    let httpStatus: number = MessageError.HTTP_STATUS;
 
     if (exception instanceof MongoError) {
       message = exception.message;
       httpStatus = Number.parseInt(exception.code.toString());
-    } else {
-      message = exception?.message || MessageError.MESSAGE;
-      httpStatus = exception?.getStatus() || MessageError.HTTP_STATUS;
+    }
+    if (exception instanceof NotFoundException) {
+      message = exception?.message;
+      httpStatus = exception?.getStatus();
     }
 
     const responseBody = {

@@ -10,11 +10,18 @@ export class ProductService {
   async create(product: Product): Promise<Product> {
     const newProduct: Product = await new this.productModel(product).save();
     const count: number = await this.productModel.count();
-    const prodcutUpdate = await this.productModel.findByIdAndUpdate(
+    const productUpdate = await this.productModel.findByIdAndUpdate(
       { _id: newProduct.id },
       { code: count },
     );
-    return prodcutUpdate;
+    return productUpdate;
+  }
+
+  async update(product: Product): Promise<Product> {
+    return await this.productModel.findByIdAndUpdate(
+      { _id: product.id },
+      product,
+    );
   }
 
   async findAll(): Promise<Product[]> {
