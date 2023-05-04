@@ -13,15 +13,15 @@ export class ProductService {
     const productUpdate = await this.productModel.findByIdAndUpdate(
       { _id: newProduct.id },
       { code: count },
+      { new: true },
     );
     return productUpdate;
   }
 
-  async update(product: Product): Promise<Product> {
-    return await this.productModel.findByIdAndUpdate(
-      { _id: product.id },
-      product,
-    );
+  async update(code: string, product: Product): Promise<Product> {
+    return await this.productModel.findByIdAndUpdate({ _id: code }, product, {
+      new: true,
+    });
   }
 
   async findAll(): Promise<Product[]> {

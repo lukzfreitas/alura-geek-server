@@ -13,9 +13,12 @@ export class ProductController {
   }
 
   @Public()
-  @Post('/products/update')
-  async update(@Body() product: any): Promise<Product> {
-    return this.productService.update(product);
+  @Post('/products/update/:code')
+  async update(
+    @Body() product: any,
+    @Param('code') code: string,
+  ): Promise<Product> {
+    return await this.productService.update(code, product);
   }
 
   @Public()
@@ -24,6 +27,7 @@ export class ProductController {
     return this.productService.delete(code);
   }
 
+  @Public()
   @Get('/products')
   async findAll(): Promise<Product[]> {
     return this.productService.findAll();
