@@ -36,6 +36,7 @@ export class ProductController {
     return this.productService.findOne(code);
   }
 
+  @Public()
   @Delete(':code')
   async delete(@Param('code') code: number): Promise<void> {
     return this.productService.delete(code);
