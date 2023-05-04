@@ -26,6 +26,12 @@ export class ProductController {
     return this.productService.update(product);
   }
 
+  @Public()
+  @Delete(':code')
+  async delete(@Param('code') code: number): Promise<void> {
+    return this.productService.delete(code);
+  }
+
   @Get()
   async findAll(): Promise<Product[]> {
     return this.productService.findAll();
@@ -34,11 +40,5 @@ export class ProductController {
   @Get(':code')
   async findByCode(@Param('code') code: number): Promise<Product> {
     return this.productService.findOne(code);
-  }
-
-  @Public()
-  @Delete(':code')
-  async delete(@Param('code') code: number): Promise<void> {
-    return this.productService.delete(code);
   }
 }
