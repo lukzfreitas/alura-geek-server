@@ -22,7 +22,7 @@ export class ProductController {
   }
 
   @Public()
-  @Delete('/products/delete/:code')
+  @Post('/products/delete/:code')
   async delete(@Param('code') code: number): Promise<void> {
     return this.productService.delete(code);
   }
