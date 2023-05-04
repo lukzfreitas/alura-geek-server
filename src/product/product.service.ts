@@ -18,8 +18,8 @@ export class ProductService {
     return productUpdate;
   }
 
-  async update(code: string, product: Product): Promise<Product> {
-    return await this.productModel.findByIdAndUpdate({ _id: code }, product, {
+  async update(id: string, product: Product): Promise<Product> {
+    return await this.productModel.findByIdAndUpdate({ _id: id }, product, {
       new: true,
     });
   }
@@ -32,7 +32,7 @@ export class ProductService {
     return this.productModel.findOne({ code }).exec();
   }
 
-  async delete(code: number): Promise<void> {
-    this.productModel.findOneAndDelete({ code }).exec();
+  async delete(id: string): Promise<void> {
+    this.productModel.findOneAndDelete({ _id: id }).exec();
   }
 }
