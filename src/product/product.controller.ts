@@ -3,33 +3,33 @@ import { Product } from './product.schema';
 import { ProductService } from './product.service';
 import { Public } from 'src/auth/auth.constant';
 
-@Controller('products')
+@Controller()
 export class ProductController {
   constructor(private productService: ProductService) {}
 
-  @Post()
+  @Post('/products')
   async create(@Body() product: any): Promise<Product> {
     return this.productService.create(product);
   }
 
   @Public()
-  @Post('update')
+  @Post('/products/update')
   async update(@Body() product: any): Promise<Product> {
     return this.productService.update(product);
   }
 
   @Public()
-  @Delete('/delete/:code')
+  @Delete('/products/delete/:code')
   async delete(@Param('code') code: number): Promise<void> {
     return this.productService.delete(code);
   }
 
-  @Get()
+  @Get('/products')
   async findAll(): Promise<Product[]> {
     return this.productService.findAll();
   }
 
-  @Get(':code')
+  @Get('/products/:code')
   async findByCode(@Param('code') code: number): Promise<Product> {
     return this.productService.findOne(code);
   }
