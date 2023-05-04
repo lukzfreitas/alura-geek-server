@@ -1,12 +1,4 @@
-import {
-  Post,
-  Body,
-  Controller,
-  Get,
-  Param,
-  Delete,
-  Put,
-} from '@nestjs/common';
+import { Post, Body, Controller, Get, Param, Delete } from '@nestjs/common';
 import { Product } from './product.schema';
 import { ProductService } from './product.service';
 import { Public } from 'src/auth/auth.constant';
@@ -27,7 +19,7 @@ export class ProductController {
   }
 
   @Public()
-  @Delete(':code')
+  @Delete('/delete/:code')
   async delete(@Param('code') code: number): Promise<void> {
     return this.productService.delete(code);
   }
