@@ -10,6 +10,6 @@ async function bootstrap() {
   useContainer(app.select(AppModule), { fallbackOnErrors: true });
   const httpAdapter = app.get(HttpAdapterHost);
   app.useGlobalFilters(new AllExceptionsFilter(httpAdapter));
-  await app.listen(process.env.PORT || 3000);
+  await app.listen(process.env.PORT || 3001);
 }
 bootstrap();
